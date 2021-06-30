@@ -13,6 +13,10 @@ export const styles = {
     button: {
         margin: 2,
         color: '#ff3f3f',
-        fontSize: 31,
-    }
+        fontSize: 35,
+    },
+    mainScroll: {
+        flex: 1,
+        backgroundColor: '#0027fb',
+    },
 };

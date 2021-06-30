@@ -22,20 +22,26 @@ import { styles } from '../config/globalStyles';
 export default class Main extends Component {
   render(){
     return (
-      <View style={styles.container}>
-
+      <ScrollView horizontal={false} style={styles.mainScroll}>
         <View style={styles.button}>
-          <Button onPress={ () => this.goScreen('BASIC')} title='Go Basic Screen' />
+          <Button onPress={ () => this.goScreen('BASIC')} title='Basic Screen' />
         </View>
-
         <View style={styles.button}>
-          <Button onPress={ () => this.goScreen('STYLE')} title='Go Style Screen' />
+          <Button onPress={ () => this.goScreen('STYLE')} title='Style Screen' />
         </View>
-
         <View style={styles.button}>
-          <Button onPress={() => this.goScreen('STYLE_RESPONSIVE')} title='Go Style Responsive Screen' />
+          <Button onPress={() => this.goScreen('STYLE_RESPONSIVE')} title='Style Responsive Screen' />
         </View>
-      </View>
+        <View style={styles.button}>
+          <Button onPress={() => this.goScreen('LIST_SCROLL_VIEW')} title='List/Scroll Screen' />
+        </View>
+        <View style={styles.button}>
+          <Button onPress={() => this.goScreen('FlAT_SECTION_LIST')} title='Flat/Section List Screen' />
+        </View>
+        <View style={styles.button}>
+          <Button onPress={() => this.goScreen('FlAT_SECTION_LIST_PRACTICE')} title='Flat/Section List Practice' />
+        </View>
+      </ScrollView>
     );
   }
 

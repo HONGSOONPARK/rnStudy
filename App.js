@@ -19,6 +19,8 @@ import MainScreen from './screen/Main';
 import BasicScreen from './screen/Basic';
 import StyleScreen from './screen/Style';
 import StyleResponsiveScreen from './screen/StyleResponsive';
+import ListScrollView from './screen/ListScrollView';
+import FlatSectionList from './screen/FlatSectionList';
 
 
 // import BasicScreen from './screen/Basic';
@@ -59,7 +61,16 @@ function App() {
           }} />
         <Stack.Screen name="STYLE_RESPONSIVE" component={StyleResponsiveScreen}
           options={{
-            title: '스타일 연습'
+            title: '스타일 반응형'
+          }} />
+        <Stack.Screen name="LIST_SCROLL_VIEW" component={ListScrollView}
+          options={{
+            title: '리스트/스크롤뷰'
+          }} />
+        <Stack.Screen name="FlAT_SECTION_LIST" component={FlatSectionList}
+          options={{
+            title: '플랫/섹션 리스트'
+          }} />
           }} />
       </Stack.Navigator>
     </NavigationContainer>
