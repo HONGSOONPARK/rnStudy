@@ -4,7 +4,7 @@
  * @flow
  */
 
-import React, {useState, Component } from 'react';
+import React, { useState, Component } from 'react';
 import {
   Button,
   Linking,
@@ -20,14 +20,14 @@ import {
 import { styles } from '../config/globalStyles';
 
 export default class Main extends Component {
-  render(){
+  render() {
     return (
       <ScrollView horizontal={false} style={styles.mainScroll}>
         <View style={styles.button}>
-          <Button onPress={ () => this.goScreen('BASIC')} title='Basic Screen' />
+          <Button onPress={() => this.goScreen('BASIC')} title='Basic Screen' />
         </View>
         <View style={styles.button}>
-          <Button onPress={ () => this.goScreen('STYLE')} title='Style Screen' />
+          <Button onPress={() => this.goScreen('STYLE')} title='Style Screen' />
         </View>
         <View style={styles.button}>
           <Button onPress={() => this.goScreen('STYLE_RESPONSIVE')} title='Style Responsive Screen' />
@@ -39,13 +39,27 @@ export default class Main extends Component {
           <Button onPress={() => this.goScreen('FlAT_SECTION_LIST')} title='Flat/Section List Screen' />
         </View>
         <View style={styles.button}>
-          <Button onPress={() => this.goScreen('FlAT_SECTION_LIST_PRACTICE')} title='Flat/Section List Practice' />
+          <Button onPress={() => this.goScreen('FlAT_SECTION_LIST_PRACTICE')} title='Flat/Section List ::: Practice' />
         </View>
+        <View style={styles.button}>
+          <Button onPress={() => this.goScreen('TEXT_KEYBOARD')} title='TextInput/Keyboard' />
+        </View>
+        <View style={styles.button}>
+          <Button onPress={() => this.goScreen('BUTTON_TOUCH_PRESSABLE')} title='Button/Touchables/Pressable' />
+        </View>
+        <View style={styles.button}>
+          <Button onPress={() => this.goScreen('ALERT_TOAST')} title='Alert/Toast' />
+        </View>
+        <View style={styles.button}>
+          <Button onPress={() => this.goScreen('MODAL_CUSTOM_ALERT')} title='MODAL_CUSTOM' />
+        </View>
+
+       
       </ScrollView>
     );
   }
 
-  goScreen(screen){
+  goScreen(screen) {
     this.props.navigation.navigate(screen);
   }
 

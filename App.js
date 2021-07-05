@@ -21,6 +21,13 @@ import StyleScreen from './screen/Style';
 import StyleResponsiveScreen from './screen/StyleResponsive';
 import ListScrollView from './screen/ListScrollView';
 import FlatSectionList from './screen/FlatSectionList';
+import FlatSectionList_Practice from './screen/FlatSectionList_Practice';
+import TextKeyboard from './screen/TextKeyboard';
+import ButtonTouchPress from './screen/ButtonTouchPress';
+import AlertToast from './screen/AlertToast';
+import ModalCustomAlert from './screen/ModalCustomAlert';
+
+
 
 
 // import BasicScreen from './screen/Basic';
@@ -71,7 +78,31 @@ function App() {
           options={{
             title: '플랫/섹션 리스트'
           }} />
+        <Stack.Screen name="FlAT_SECTION_LIST_PRACTICE" component={FlatSectionList_Practice}
+          options={{
+            title: '플랫/섹션 연습문제'
           }} />
+
+        <Stack.Screen name="TEXT_KEYBOARD" component={TextKeyboard}
+          options={{
+            title: '텍스트입력/키보드'
+          }} />
+
+        <Stack.Screen name="BUTTON_TOUCH_PRESSABLE" component={ButtonTouchPress}
+          options={{
+            title: '버튼/터치/프레스'
+          }} />
+        <Stack.Screen name="ALERT_TOAST" component={AlertToast}
+          options={{
+            title: '알럿/토스트'
+          }} />
+          
+        <Stack.Screen name="MODAL_CUSTOM_ALERT" component={ModalCustomAlert}
+          options={{
+            title: '모덜/커스텀얼럿'
+          }} />
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );
