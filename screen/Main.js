@@ -53,8 +53,9 @@ export default class Main extends Component {
         <View style={styles.button}>
           <Button onPress={() => this.goScreen('MODAL_CUSTOM_ALERT')} title='MODAL_CUSTOM' />
         </View>
-
-       
+        <View style={styles.button}>
+          <Button onPress={() => this.goScreen('IMAGE_BACKGROUND')} title='IMAGE/IMAGEBACKGROUND' />
+        </View>
       </ScrollView>
     );
   }

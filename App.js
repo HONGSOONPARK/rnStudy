@@ -26,8 +26,7 @@ import TextKeyboard from './screen/TextKeyboard';
 import ButtonTouchPress from './screen/ButtonTouchPress';
 import AlertToast from './screen/AlertToast';
 import ModalCustomAlert from './screen/ModalCustomAlert';
-
-
+import ImageImageBackground from './screen/ImageImageBackground';
 
 
 // import BasicScreen from './screen/Basic';
@@ -102,6 +101,13 @@ function App() {
             title: '모덜/커스텀얼럿'
           }} />
 
+        <Stack.Screen name="IMAGE_BACKGROUND" component={ImageImageBackground}
+          options={{
+            title: '이미지/백그라운드'
+          }} />
+
+
+          
 
       </Stack.Navigator>
     </NavigationContainer>
