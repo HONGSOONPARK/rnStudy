@@ -56,6 +56,9 @@ export default class Main extends Component {
         <View style={styles.button}>
           <Button onPress={() => this.goScreen('IMAGE_BACKGROUND')} title='IMAGE/IMAGEBACKGROUND' />
         </View>
+        <View style={styles.button}>
+          <Button onPress={() => this.goScreen('CUSTOM_COMPONENTS')} title='COMPONENTS/PR' />
+        </View>
       </ScrollView>
     );
   }
