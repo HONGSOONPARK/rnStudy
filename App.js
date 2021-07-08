@@ -33,6 +33,8 @@ import ModalCustomAlert from './screen/ModalCustomAlert';
 import ImageImageBackground from './screen/ImageImageBackground';
 import CustomComponents from './screen/CustomComponents/CustomComponents';
 import TabNavigator from './screen/TabNavigator';
+import DrawerNavigation from './screen/DrawerNavigation';
+import PassingData from './screen/PassingData/PassingData';
 
 import { styles } from './config/globalStyles';
 
@@ -90,6 +92,12 @@ function MainScreen({ navigation }) {
       </View>
       <View style={styles.button}>
         <Button onPress={() => onPressHandler('TAB_NAVIGATOR')} title='TAB NAVIGATOR' />
+      </View>
+      <View style={styles.button}>
+        <Button onPress={() => onPressHandler('DRAWER_NAVIGATION')} title='DRAWER NAVIGATOR' />
+      </View>
+      <View style={styles.button}>
+        <Button onPress={() => onPressHandler('PASSING_DATA')} title='PASSING DATA' />
       </View>
     </ScrollView>
   );
@@ -179,6 +187,15 @@ function App() {
             title: '커스텀 컴포넌트'
           }} />
 
+        <Stack.Screen name="DRAWER_NAVIGATION" component={DrawerNavigation}
+          options={{
+            title: '드로어 네비게이션'
+          }} />
+
+        <Stack.Screen name="PASSING_DATA" component={PassingData}
+          options={{
+            title: '패씽데이타'
+          }} />
 
       </Stack.Navigator>
 

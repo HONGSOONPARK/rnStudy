@@ -19,7 +19,7 @@ import {
 
 import { styles } from '../config/globalStyles';
 
-export default Basic = () => {
+export default Basic = ({navigation}) => {
 
   const [name, setName] = useState('Hong');
   const [session, setSession] = useState({number:6, title:'state'});
@@ -44,6 +44,15 @@ export default Basic = () => {
     setCount(count+1);
   }
 
+  const onClickToggle = () => {
+    // setNumber({number: (number.number + 5)});
+
+    navigation.toggleDrawer();
+    // navigation.openDrawer();
+    // navigation.closeDrawer();
+    
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>My name is {name}</Text>
@@ -54,6 +63,9 @@ export default Basic = () => {
       <Text style={styles.text}>Number: {count * 5}</Text>
       <Button title='Add Count' onPress={onClickCountHandler}></Button>
       <Text style={styles.text}>Click Count: {count}</Text>
+      
+
+      <Button title='Toggle Drawer' onPress={onClickToggle}></Button>
     </View>
   );
     
