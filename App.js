@@ -10,36 +10,39 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   Button,
   Linking,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
-  StyleSheet,
+  GlobalStylesheet,
   Text,
   useColorScheme,
   View,
 } from 'react-native';
 
-// import MainScreen from './screen/Main';
-import BasicScreen from './screen/Basic';
-import StyleScreen from './screen/Style';
-import StyleResponsiveScreen from './screen/StyleResponsive';
-import ListScrollView from './screen/ListScrollView';
-import FlatSectionList from './screen/FlatSectionList';
-import FlatSectionList_Practice from './screen/FlatSectionList_Practice';
-import TextKeyboard from './screen/TextKeyboard';
-import ButtonTouchPress from './screen/ButtonTouchPress';
-import AlertToast from './screen/AlertToast';
-import ModalCustomAlert from './screen/ModalCustomAlert';
-import ImageImageBackground from './screen/ImageImageBackground';
-import CustomComponents from './screen/CustomComponents/CustomComponents';
-import TabNavigator from './screen/TabNavigator';
-import DrawerNavigation from './screen/DrawerNavigation';
-import PassingData from './screen/PassingData/PassingData';
+// import MainScreen from './src/screen/Main';
+import GlobalStyles from './src/common/globalStyles';
+import BasicScreen from './src/screen/Basic';
+import GlobalStylescreen from './src/screen/Style';
+import StyleResponsiveScreen from './src/screen/StyleResponsive';
+import ListScrollView from './src/screen/ListScrollView';
+import FlatSectionList from './src/screen/FlatSectionList';
+import FlatSectionList_Practice from './src/screen/FlatSectionList_Practice';
+import TextKeyboard from './src/screen/TextKeyboard';
+import ButtonTouchPress from './src/screen/ButtonTouchPress';
+import AlertToast from './src/screen/AlertToast';
+import ModalCustomAlert from './src/screen/ModalCustomAlert';
+import ImageImageBackground from './src/screen/ImageImageBackground';
+import CustomComponents from './src/screen/CustomComponents/CustomComponents';
+import TabNavigator from './src/screen/TabNavigator';
+import DrawerNavigation from './src/screen/DrawerNavigation';
+import PassingData from './src/screen/PassingData/PassingData';
+import LoginPage from './src/screen/Login/LoginPage';
+import LoginResult from './src/screen/Login/LoginResult';
 
-import { styles } from './config/globalStyles';
 
 
-// import BasicScreen from './screen/Basic';
+// import BasicScreen from './src/screen/Basic';
 // #faa818    #41a30d    #ffce38 #367d7d    #d33502    #6ebcbc #37526d
 
 const Stack = createStackNavigator();
@@ -53,56 +56,56 @@ function MainScreen({ navigation }) {
   }
 
   return (
-    <ScrollView horizontal={false} style={styles.mainScroll}>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('BASIC')} title='Basic Screen' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('STYLE')} title='Style Screen' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('STYLE_RESPONSIVE')} title='Style Responsive Screen' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('LIST_SCROLL_VIEW')} title='List/Scroll Screen' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('FlAT_SECTION_LIST')} title='Flat/Section List Screen' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('FlAT_SECTION_LIST_PRACTICE')} title='Flat/Section List ::: Practice' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('TEXT_KEYBOARD')} title='TextInput/Keyboard' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('BUTTON_TOUCH_PRESSABLE')} title='Button/Touchables/Pressable' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('ALERT_TOAST')} title='Alert/Toast' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('MODAL_CUSTOM_ALERT')} title='MODAL_CUSTOM' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('IMAGE_BACKGROUND')} title='IMAGE/IMAGEBACKGROUND' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('CUSTOM_COMPONENTS')} title='COMPONENTS/PROPS' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('TAB_NAVIGATOR')} title='TAB NAVIGATOR' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('DRAWER_NAVIGATION')} title='DRAWER NAVIGATOR' />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => onPressHandler('PASSING_DATA')} title='PASSING DATA' />
-      </View>
+    <ScrollView horizontal={false} style={GlobalStyles.mainScroll}>
+
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('BASIC')}>
+        <Text style={GlobalStyles.text} >Basic Screen</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('STYLE_RESPONSIVE')}>
+        <Text style={GlobalStyles.text} >Style Responsive Screen</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('LIST_SCROLL_VIEW')}>
+        <Text style={GlobalStyles.text} >List/Scroll Screen</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('FlAT_SECTION_LIST')}>
+        <Text style={GlobalStyles.text} >Flat/Section List Screen</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('FlAT_SECTION_LIST_PRACTICE')}>
+        <Text style={GlobalStyles.text} >Flat/Section List ::: Practice</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('TEXT_KEYBOARD')}>
+        <Text style={GlobalStyles.text} >TextInput/Keyboard</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('BUTTON_TOUCH_PRESSABLE')}>
+        <Text style={GlobalStyles.text} >Button/Touchables/Pressable</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('ALERT_TOAST')}>
+        <Text style={GlobalStyles.text} >Alert/Toast</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('MODAL_CUSTOM_ALERT')}>
+        <Text style={GlobalStyles.text} >MODAL_CUSTOM</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('IMAGE_BACKGROUND')}>
+        <Text style={GlobalStyles.text} >IMAGE/IMAGEBACKGROUND</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('CUSTOM_COMPONENTS')}>
+        <Text style={GlobalStyles.text} >COMPONENTS/PROPS</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('TAB_NAVIGATOR')}>
+        <Text style={GlobalStyles.text} >TAB NAVIGATOR</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('DRAWER_NAVIGATION')}>
+        <Text style={GlobalStyles.text} >DRAWER NAVIGATOR</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('PASSING_DATA')}>
+        <Text style={GlobalStyles.text} >PASSING DATA</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('LOGIN_PAGE')}>
+        <Text style={GlobalStyles.text} >LOGIN PAGE</Text>
+      </Pressable>
     </ScrollView>
   );
 }
-
 
 function App() {
   return (
@@ -133,7 +136,7 @@ function App() {
             title: '기본기능',
             header: () => null
           }} />
-        <Stack.Screen name="STYLE" component={StyleScreen}
+        <Stack.Screen name="STYLE" component={GlobalStylescreen}
           options={{
             title: '스타일'
           }} />
@@ -195,6 +198,17 @@ function App() {
         <Stack.Screen name="PASSING_DATA" component={PassingData}
           options={{
             title: '패씽데이타'
+          }} />
+
+        <Stack.Screen name="LOGIN_PAGE" component={LoginPage}
+          options={{
+            title: '로그인'
+          }}
+           />
+
+        <Stack.Screen name="LOGIN_RESULT" component={LoginResult}
+          options={{
+            title: '로그인 성공'
           }} />
 
       </Stack.Navigator>
