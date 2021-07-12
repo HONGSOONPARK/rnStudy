@@ -1,10 +1,15 @@
 // App.js
-import * as React from 'react';
+import React, { useEffect } from 'react';
 
 // navigation 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { Provider } from 'react-redux';
+import { Store } from './src/redux/store'
+
+import PushNotification from 'react-native-push-notification';
 
 
 import {
@@ -37,8 +42,13 @@ import CustomComponents from './src/screen/CustomComponents/CustomComponents';
 import TabNavigator from './src/screen/TabNavigator';
 import DrawerNavigation from './src/screen/DrawerNavigation';
 import PassingData from './src/screen/PassingData/PassingData';
-import LoginPage from './src/screen/Login/LoginPage';
-import LoginResult from './src/screen/Login/LoginResult';
+import LoginPage from './src/screen/LoginAsync/LoginPage';
+import LoginResult from './src/screen/LoginAsync/LoginResult';
+import LoginPageSl from './src/screen/LoginSqlite/LoginPageSl';
+import LoginResultSl from './src/screen/LoginSqlite/LoginResultSl';
+import LoginPageRedux from './src/screen/LoginRedux/LoginPageRedux';
+import LoginResultRedux from './src/screen/LoginRedux/LoginResultRedux';
+import FetchApiRedux from './src/screen/FetchApi/FetchApiRedux';
 
 
 
@@ -47,6 +57,8 @@ import LoginResult from './src/screen/Login/LoginResult';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+
 
 function MainScreen({ navigation }) {
 
@@ -101,123 +113,172 @@ function MainScreen({ navigation }) {
         <Text style={GlobalStyles.text} >PASSING DATA</Text>
       </Pressable>
       <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('LOGIN_PAGE')}>
-        <Text style={GlobalStyles.text} >LOGIN PAGE</Text>
+        <Text style={GlobalStyles.text} >LOGIN PAGE(ASYNC)</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('LOGIN_PAGE_SQLITE')}>
+        <Text style={GlobalStyles.text} >LOGIN PAGE(SQLITE)</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('LOGIN_PAGE_REDUX')}>
+        <Text style={GlobalStyles.text} >LOGIN PAGE(REDUX)</Text>
+      </Pressable>
+      <Pressable style={GlobalStyles.button} onPress={() => onPressHandler('FETCH_API_REDUX')}>
+        <Text style={GlobalStyles.text} >FETCH DATA(REDUX)</Text>
       </Pressable>
     </ScrollView>
   );
 }
 
 function App() {
+
+  
+const createChannel = () => {
+  console.log('create channel');
+  PushNotification.createChannel(
+    {
+      channelId: 'test-channel',
+      channelName: 'Test Channel'
+    }
+  )
+}
+
+useEffect(() => {
+  createChannel();
+}, []);
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="MAIN"
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: '#d33502',
-            height: 50,
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            color: '#ffffff',
-            fontSize: 30,
-          },
-          headerTitleAlign: 'center',
-        }}
-      >
-
-        <Stack.Screen name="MAIN" component={MainScreen}
-          options={{
-            title: '메인화면'
-          }} />
-        <Stack.Screen name="BASIC" component={BasicScreen}
-          options={{
-            title: '기본기능',
-            header: () => null
-          }} />
-        <Stack.Screen name="STYLE" component={GlobalStylescreen}
-          options={{
-            title: '스타일'
-          }} />
-        <Stack.Screen name="STYLE_RESPONSIVE" component={StyleResponsiveScreen}
-          options={{
-            title: '스타일 반응형'
-          }} />
-        <Stack.Screen name="LIST_SCROLL_VIEW" component={ListScrollView}
-          options={{
-            title: '리스트/스크롤뷰'
-          }} />
-        <Stack.Screen name="FlAT_SECTION_LIST" component={FlatSectionList}
-          options={{
-            title: '플랫/섹션 리스트'
-          }} />
-        <Stack.Screen name="FlAT_SECTION_LIST_PRACTICE" component={FlatSectionList_Practice}
-          options={{
-            title: '플랫/섹션 연습문제'
-          }} />
-
-        <Stack.Screen name="TEXT_KEYBOARD" component={TextKeyboard}
-          options={{
-            title: '텍스트입력/키보드'
-          }} />
-
-        <Stack.Screen name="BUTTON_TOUCH_PRESSABLE" component={ButtonTouchPress}
-          options={{
-            title: '버튼/터치/프레스'
-          }} />
-        <Stack.Screen name="ALERT_TOAST" component={AlertToast}
-          options={{
-            title: '알럿/토스트'
-          }} />
-
-        <Stack.Screen name="MODAL_CUSTOM_ALERT" component={ModalCustomAlert}
-          options={{
-            title: '모덜/커스텀얼럿'
-          }} />
-
-        <Stack.Screen name="IMAGE_BACKGROUND" component={ImageImageBackground}
-          options={{
-            title: '이미지/백그라운드'
-          }} />
-        <Stack.Screen name="CUSTOM_COMPONENTS" component={CustomComponents}
-          options={{
-            title: '커스텀 컴포넌트'
-          }} />
-
-        <Stack.Screen name="TAB_NAVIGATOR" component={TabNavigator}
-          options={{
-            title: '커스텀 컴포넌트'
-          }} />
-
-        <Stack.Screen name="DRAWER_NAVIGATION" component={DrawerNavigation}
-          options={{
-            title: '드로어 네비게이션'
-          }} />
-
-        <Stack.Screen name="PASSING_DATA" component={PassingData}
-          options={{
-            title: '패씽데이타'
-          }} />
-
-        <Stack.Screen name="LOGIN_PAGE" component={LoginPage}
-          options={{
-            title: '로그인'
+    <Provider store={Store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="MAIN"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#d33502',
+              height: 50,
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              color: '#ffffff',
+              fontSize: 30,
+            },
+            headerTitleAlign: 'center',
           }}
-           />
+        >
 
-        <Stack.Screen name="LOGIN_RESULT" component={LoginResult}
-          options={{
-            title: '로그인 성공'
-          }} />
+          <Stack.Screen name="MAIN" component={MainScreen}
+            options={{
+              title: '메인화면'
+            }} />
+          <Stack.Screen name="BASIC" component={BasicScreen}
+            options={{
+              title: '기본기능',
+              header: () => null
+            }} />
+          <Stack.Screen name="STYLE" component={GlobalStylescreen}
+            options={{
+              title: '스타일'
+            }} />
+          <Stack.Screen name="STYLE_RESPONSIVE" component={StyleResponsiveScreen}
+            options={{
+              title: '스타일 반응형'
+            }} />
+          <Stack.Screen name="LIST_SCROLL_VIEW" component={ListScrollView}
+            options={{
+              title: '리스트/스크롤뷰'
+            }} />
+          <Stack.Screen name="FlAT_SECTION_LIST" component={FlatSectionList}
+            options={{
+              title: '플랫/섹션 리스트'
+            }} />
+          <Stack.Screen name="FlAT_SECTION_LIST_PRACTICE" component={FlatSectionList_Practice}
+            options={{
+              title: '플랫/섹션 연습문제'
+            }} />
 
-      </Stack.Navigator>
+          <Stack.Screen name="TEXT_KEYBOARD" component={TextKeyboard}
+            options={{
+              title: '텍스트입력/키보드'
+            }} />
+
+          <Stack.Screen name="BUTTON_TOUCH_PRESSABLE" component={ButtonTouchPress}
+            options={{
+              title: '버튼/터치/프레스'
+            }} />
+          <Stack.Screen name="ALERT_TOAST" component={AlertToast}
+            options={{
+              title: '알럿/토스트'
+            }} />
+
+          <Stack.Screen name="MODAL_CUSTOM_ALERT" component={ModalCustomAlert}
+            options={{
+              title: '모덜/커스텀얼럿'
+            }} />
+
+          <Stack.Screen name="IMAGE_BACKGROUND" component={ImageImageBackground}
+            options={{
+              title: '이미지/백그라운드'
+            }} />
+          <Stack.Screen name="CUSTOM_COMPONENTS" component={CustomComponents}
+            options={{
+              title: '커스텀 컴포넌트'
+            }} />
+
+          <Stack.Screen name="TAB_NAVIGATOR" component={TabNavigator}
+            options={{
+              title: '커스텀 컴포넌트'
+            }} />
+
+          <Stack.Screen name="DRAWER_NAVIGATION" component={DrawerNavigation}
+            options={{
+              title: '드로어 네비게이션'
+            }} />
+
+          <Stack.Screen name="PASSING_DATA" component={PassingData}
+            options={{
+              title: '패씽데이타'
+            }} />
+
+          <Stack.Screen name="LOGIN_PAGE" component={LoginPage}
+            options={{
+              title: '로그인(Async)'
+            }}
+          />
+          <Stack.Screen name="LOGIN_RESULT" component={LoginResult}
+            options={{
+              title: '로그인 성공(Async)'
+            }} />
+
+          <Stack.Screen name="LOGIN_PAGE_SQLITE" component={LoginPageSl}
+            options={{
+              title: '로그인(Sqlite)'
+            }}
+          />
+          <Stack.Screen name="LOGIN_RESULT_SQLITE" component={LoginResultSl}
+            options={{
+              title: '로그인 성공(Sqlite)'
+            }} />
 
 
+          <Stack.Screen name="LOGIN_PAGE_REDUX" component={LoginPageRedux}
+            options={{
+              title: '로그인(Redux)'
+            }}
+          />
+          <Stack.Screen name="LOGIN_RESULT_REDUX" component={LoginResultRedux}
+            options={{
+              title: '로그인 성공(Redux)'
+            }} />
 
-    </NavigationContainer>
+          <Stack.Screen name="FETCH_API_REDUX" component={FetchApiRedux}
+            options={{
+              title: 'FETCH API(Redux)'
+            }} />
 
+        </Stack.Navigator>
 
+      </NavigationContainer>
+
+    </Provider>
   );
 }
 

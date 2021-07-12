@@ -17,7 +17,7 @@ export default StyleSheet.create({
         justifyContent:'center',
     },
     button: {
-        margin: 2,
+        margin: 1,
         fontSize: 35,
         backgroundColor:'#0099cb90',
         fontFamily: 'Yomogi-Regular',
