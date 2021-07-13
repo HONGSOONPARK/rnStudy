@@ -55,16 +55,33 @@ export default function FetchApiRedux({ navigation, route }) {
     // createChannel();
   }, []);
 
-  const handleNotification = (item) => {
+  const handleNotification = (item, index) => {
+    // console.log(item);
 
-    console.log(item);
+    PushNotification.cancelAllLocalNotifications();
+    // PushNotification.cancelAllLocalNotifications({
+    //   id:3
+    // });
 
     PushNotification.localNotification({
       channelId: 'test-channel',
-      title: 'Click : ',
-      message: item.earning_late,
-      bigText: item.earning_late + 'is one of'
+      title: 'title ',
+      message: item.earning_late.toString(),
+      bigText: item.earning_late.toString() + '야라라라랄',
+      color: "red",
+      id: index
     });
+
+    if(index == 2){
+      PushNotification.localNotificationSchedule({
+        channelId: 'test-channel',
+        title: 'Alarm ',
+        message: item.earning_late.toString() + "click 20초 전",
+        date: new Date(Date.now() + 20 * 1000),
+        allowWhileIdle: true,
+      });
+    }
+ 
 
   }
 
@@ -75,11 +92,23 @@ export default function FetchApiRedux({ navigation, route }) {
         Fetch Data Call API, Redux
       </Text>
 
+      <CustomButton 
+        color='#ff0d93'
+        title='Camera'
+        onPressFunction={() => { navigation.navigate('CAMERA')}}
+      />
+
       <FlatList
         data={cities}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <TouchableOpacity
-            onPress={() => { handleNotification(item) }}
+            onPress={() => { 
+              handleNotification(item, index);
+              navigation.navigate('MAP_SCREEN', {
+                title : item.seq.toString(),
+              });
+            
+            }}
           >
             <View style={styles.item}>
               <Text style={styles.title}>{item.seq}</Text>
@@ -142,6 +171,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 10,
     color: '#999999'
-  }
+  },
+
 
 })

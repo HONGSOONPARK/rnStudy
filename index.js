@@ -24,8 +24,9 @@ import {name as appName} from './app.json';
 
 
 PushNotification.configure({
+  
   onNotification: function (notification) {
-      console.log("NOTIFICATION:", notification);
+      console.log("NOTIFICATION:"+notification);
   },
   requestPermissions: Platform.OS === 'ios'
 });

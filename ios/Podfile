@@ -14,6 +14,8 @@ target 'rnStudy' do
 
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
+  pod 'RNCPushNotificationIOS', :path => '../node_modules/@react-native-community/push-notification-ios'
+
   target 'rnStudyTests' do
     inherit! :complete
     # Pods for testing

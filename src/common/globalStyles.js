@@ -9,9 +9,9 @@ export default StyleSheet.create({
         backgroundColor: '#0067fb',
     },
     text: {
-        margin: 10,
+        margin: 9,
         color: '#ffffff',
-        fontSize: 20,
+        fontSize: 17,
         fontFamily: 'Gaegu-Regular',
         alignItems:'center',
         justifyContent:'center',
@@ -27,4 +27,12 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: '#0027fb',
     },
+    map_text: {
+        margin: 10,
+        color: '#0099cb90',
+        fontSize: 30,
+        fontFamily: 'Gaegu-Regular',
+        alignItems:'center',
+        justifyContent:'center',
+    }
 });

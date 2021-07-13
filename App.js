@@ -11,7 +11,6 @@ import { Store } from './src/redux/store'
 
 import PushNotification from 'react-native-push-notification';
 
-
 import {
   Button,
   Linking,
@@ -49,6 +48,8 @@ import LoginResultSl from './src/screen/LoginSqlite/LoginResultSl';
 import LoginPageRedux from './src/screen/LoginRedux/LoginPageRedux';
 import LoginResultRedux from './src/screen/LoginRedux/LoginResultRedux';
 import FetchApiRedux from './src/screen/FetchApi/FetchApiRedux';
+import MapSreen from './src/screen/MapSreen';
+import Camera from './src/screen/Camera.js';
 
 
 
@@ -272,6 +273,16 @@ useEffect(() => {
           <Stack.Screen name="FETCH_API_REDUX" component={FetchApiRedux}
             options={{
               title: 'FETCH API(Redux)'
+            }} />
+
+            <Stack.Screen name="MAP_SCREEN" component={MapSreen}
+            options={{
+              title: 'Map'
+            }} />
+
+            <Stack.Screen name="CAMERA" component={Camera}
+            options={{
+              title: 'Camera'
             }} />
 
         </Stack.Navigator>
