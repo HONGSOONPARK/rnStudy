@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 40,
-    fontFamily: 'Yomogi-Regular',
+    // fontFamily: 'Yomogi-Regular',
     margin: 10,
   }
 })

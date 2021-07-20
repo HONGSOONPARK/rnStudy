@@ -12,7 +12,7 @@ export default StyleSheet.create({
         margin: 9,
         color: '#ffffff',
         fontSize: 17,
-        fontFamily: 'Gaegu-Regular',
+        // fontFamily: 'Gaegu-Regular',
         alignItems:'center',
         justifyContent:'center',
     },
@@ -20,7 +20,7 @@ export default StyleSheet.create({
         margin: 1,
         fontSize: 35,
         backgroundColor:'#0099cb90',
-        fontFamily: 'Yomogi-Regular',
+        // fontFamily: 'Yomogi-Regular',
         alignItems:'center',
     },
     mainScroll: {
@@ -31,7 +31,7 @@ export default StyleSheet.create({
         margin: 10,
         color: '#0099cb90',
         fontSize: 30,
-        fontFamily: 'Gaegu-Regular',
+        // fontFamily: 'Gaegu-Regular',
         alignItems:'center',
         justifyContent:'center',
     }
