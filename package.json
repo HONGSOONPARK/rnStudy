@@ -7,9 +7,11 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "aios": "react-native run-ios && react-native run-android"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.15.0",
     "@react-native-async-storage/async-storage": "^1.15.5",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-community/push-notification-ios": "^1.8.0",
@@ -28,12 +30,14 @@
     "react-native-maps": "^0.28.0",
     "react-native-paper": "^4.9.2",
     "react-native-push-notification": "^7.4.0",
-    "react-native-reanimated": "^2.2.0",
+    "react-native-reanimated": "^2.0.1",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.4.0",
     "react-native-sqlite-storage": "^5.0.0",
     "react-native-tab-view": "^2.16.0",
     "react-native-vector-icons": "^8.1.0",
+    "react-native-web": "^0.17.1",
+    "react-native-windows": "^0.64.14",
     "react-navigation": "^4.4.4",
     "react-redux": "^7.2.4",
     "redux-thunk": "^2.3.0"

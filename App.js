@@ -154,7 +154,6 @@ useEffect(() => {
           screenOptions={{
             headerStyle: {
               backgroundColor: '#d33502',
-              height: 50,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
