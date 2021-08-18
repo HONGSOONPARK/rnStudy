@@ -11,6 +11,10 @@
     "aios": "react-native run-ios && react-native run-android"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.15.0",
+    "@react-native-community/picker": "^1.8.1",
+    "@react-native-community/slider": "^3.0.3",
+    "@react-native-picker/picker": "^1.16.5",
     "react": "17.0.1",
     "react-native": "0.64.2"
   },
