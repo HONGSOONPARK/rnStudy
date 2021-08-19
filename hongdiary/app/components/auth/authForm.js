@@ -6,6 +6,10 @@ import Input from '../../utils/forms/input'
 
 import ValidationRules from '../../utils/forms/validationRules';
 
+// 컴포넌트는 리덕스에 직접 접근 못하므로 connect 사용
+import { connect } from 'react-redux';
+import { signIn, signUp } from '../../store/actions/user_actions';
+import { bindActionCreators } from 'redux';
 
 
 class AuthForm extends Component {
@@ -124,14 +128,10 @@ class AuthForm extends Component {
         if (isFormValid){
             if(this.state.type === 'Login'){
                 console.log('login');
-                for (let key in submittedForm){
-                    console.log(submittedForm[key]);
-                }
+                this.props.signIn(submittedForm)
             }else{
                 console.log('join');
-                for (let key in submittedForm){
-                    console.log(submittedForm[key]);
-                }
+                this.props.signUp(submittedForm)
             }
         }else{
             this.setState({
@@ -223,5 +223,15 @@ const styles = StyleSheet.create({
 })
 
 
+function mapStateToProps(state){
+    return {
+        User: state.User
+    }
+}
 
-export default AuthForm;
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({signIn, signUp}, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthForm);
