@@ -1,0 +1,45 @@
+import React from 'react';
+import { TextInput, StyleSheet } from 'react-native';
+
+const input = (props) => {
+    let template = null;
+    switch(props.type) {
+        case "textinput":
+            template =
+                <TextInput
+                    {...props}
+                    style={styles.input} />
+            break;
+        case "textinputRevised":
+            template =
+                <TextInput
+                    {...props}
+                    style={styles.inputRevised} />
+            break;
+        default:
+            return template;
+    }
+
+return template;
+}
+
+
+const styles = StyleSheet.create({
+    input: {
+        width: '100%',
+        borderBottomWidth: 1,
+        borderBottomColor: '#fff',
+        fontSize: 16,
+        padding: 5,
+        marginTop: 30
+    },
+    inputRevised: {
+        width: '100%',
+        borderBottomWidth: 1,
+        borderBottomColor: 'red',
+        fontSize: 16,
+        padding: 5,
+        marginTop: 30
+    }
+})
+export default input;

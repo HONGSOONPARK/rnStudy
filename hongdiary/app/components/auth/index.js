@@ -20,11 +20,17 @@ import {
 import AuthLogo from './authLogo';
 import AuthForm from './authForm';
 
+// #30A9DE #EFDC05 #E53A40 #090707
 
 class AuthComponent extends Component {
 
   state = {
     loading: false,
+  }
+
+  goWithOutLogin = () => {
+    this.props.navigation.navigate("AppTabComponent")
+
   }
 
   render() {
@@ -39,7 +45,9 @@ class AuthComponent extends Component {
         <ScrollView style={styles.container}>
           <View>
             <AuthLogo />
-            <AuthForm />
+            <AuthForm
+              goWithOutLogin={this.goWithOutLogin}
+            />
           </View>
         </ScrollView>
       )
@@ -57,8 +65,10 @@ const styles = StyleSheet.create({
   },
   container: {
       flex: 1,
-      backgroundColor: '#7487c5',
+      backgroundColor: '#30A9DE',
       padding: 130,
+      paddingLeft: 50,
+      paddingRight: 50,
 
   }
 });

@@ -23,11 +23,15 @@ const MainScreenTab = createBottomTabNavigator();
 
 */
 
+// #30A9DE #EFDC05 #E53A40 #090707
+
 const isLoggedIn = false;
 
 const AppTabComponent = () => {
     return (
-        <MainScreenTab.Navigator>
+        <MainScreenTab.Navigator
+            screenOptions={{headerShown:false}}
+        >
             <MainScreenTab.Screen name="Diary" component={Diary} />
             <MainScreenTab.Screen name="News" component={News} />
         </MainScreenTab.Navigator>
@@ -42,7 +46,10 @@ export const RootNavigator = () => {
             {isLoggedIn ? (
                 <AuthStack.Screen name="Main" component={AppTabComponent} />
             ) : (
+                <>
                 <AuthStack.Screen name="SignIn" component={SignIn} />
+                <AuthStack.Screen name="AppTabComponent" component={AppTabComponent} />
+                </>
             )}
         </AuthStack.Navigator>
     )
