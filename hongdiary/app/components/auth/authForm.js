@@ -10,6 +10,7 @@ import ValidationRules from '../../utils/forms/validationRules';
 import { connect } from 'react-redux';
 import { signIn, signUp } from '../../store/actions/user_actions';
 import { bindActionCreators } from 'redux';
+import { setTokens } from '../../utils/misc';
 
 
 class AuthForm extends Component {
@@ -99,7 +100,7 @@ class AuthForm extends Component {
 
         this.setState({
             type: type === "Login" ? "Register" : "Login",
-            action: type === "로그인" ? "새로운 등록" : "로그인",
+            action: type === "로그인" ? "새로운 등록" : "등록",
             actionMode: type === "로그인" ? "새로운 등록" : "로그인화면으로",
         })
 
@@ -128,14 +129,30 @@ class AuthForm extends Component {
         if (isFormValid){
             if(this.state.type === 'Login'){
                 console.log('login');
-                this.props.signIn(submittedForm)
+                this.props.signIn(submittedForm).then(()=>{
+                    this.manageAccess();
+                })
             }else{
                 console.log('join');
-                this.props.signUp(submittedForm)
+                this.props.signUp(submittedForm).then(()=>{
+                    this.manageAccess();
+                })
             }
         }else{
             this.setState({
                 hasErrors: true
+            })
+        }
+    }
+
+    // 새로운 state 저장 완료 후 처리
+    manageAccess = () =>{
+        if(!this.props.User.auth.userId) {
+            this.setState({hasErrors: true})
+        } else {
+            setTokens(this.props.User.auth, ()=>{
+                this.setState({hasErrors: false});
+                this.props.goWithOutLogin();
             })
         }
     }
