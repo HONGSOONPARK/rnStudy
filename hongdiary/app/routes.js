@@ -13,18 +13,20 @@ import Logo from './utils/logo';
 
 
 const MainScreenTab = createBottomTabNavigator();
-
 const AuthStack = createStackNavigator();
 const DiaryStack = createStackNavigator();
 const NewsStack = createStackNavigator();
+
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const headerConfig = {
     headerTitleAlign: 'center',
     headerTintColor: '#fff',
     headerStyle: {
-        backgroundColor:'#30A9DE',
+        backgroundColor: '#30A9DE',
     },
-    title: <Logo/>,
+    title: <Logo />,
     headerTitleStyle: {
         flex: 1,
         textAlign: 'center'
@@ -48,10 +50,25 @@ const headerConfig = {
 
 const isLoggedIn = false;
 
+const TabBarIcon = (focused, name, color) => {
+    let iconName, iconSize;
+    const icons = {
+        DiaryTab: 'notebook-outline',
+        NewsTab: 'newspaper-variant-outline',
+    };
+
+    if (focused) iconSize = 37;
+    else iconSize = 32;
+
+    return <Icon name={icons[name]} size={iconSize} color={color} />
+
+}
+
+
 const DiaryStackComponent = () => {
     return (
         <DiaryStack.Navigator>
-            <DiaryStack.Screen name="Diary" component={Diary} options={headerConfig}/>
+            <DiaryStack.Screen name="Diary" component={Diary} options={headerConfig} />
             <DiaryStack.Screen name="DiaryDocu" component={DiaryDocu} options={headerConfig} />
         </DiaryStack.Navigator>
     )
@@ -69,27 +86,22 @@ const NewsStackComponent = () => {
 const AppTabComponent = () => {
     return (
         <MainScreenTab.Navigator
-        screenOptions={
-            ({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-  
-              if (route.name === 'Home') {
-                iconName = focused
-                  ? 'ios-information-circle'
-                  : 'ios-information-circle-outline';
-              } else if (route.name === 'Settings') {
-                iconName = focused ? 'ios-list-box' : 'ios-list';
-              }
-  
-              // You can return any component that you like here!
-              return null;
-            },
-            tabBarActiveTintColor: 'tomato',
-            tabBarInactiveTintColor: 'gray',
-            headerShown: false,
-          })}
-        
+            initialRouteName="DiaryTab"
+            screenOptions={
+                ({ route }) => ({
+                    tabBarIcon: ({ focused, color, size }) => (
+                        TabBarIcon(focused, route.name, color)
+                    ),
+                    headerShown: false,
+                    tabBarActiveTintColor: '#EFDC05',
+                    // tabBarInactiveTintColor: '#EFDC05',
+                    tabBarInactiveTintColor: '#E3d3d3',
+                    tabBarShowLabel: false,
+                    tabBarStyle: {
+                        backgroundColor: '#30A9DE'
+                    }
+                })
+            }
         >
             <MainScreenTab.Screen name="DiaryTab" component={DiaryStackComponent} />
             <MainScreenTab.Screen name="NewsTab" component={NewsStackComponent} />
@@ -101,14 +113,14 @@ const AppTabComponent = () => {
 export const RootNavigator = () => {
     return (
         <AuthStack.Navigator
-            screenOptions={{headerShown:false}}
+            screenOptions={{ headerShown: false }}
         >
             {isLoggedIn ? (
                 <AuthStack.Screen name="Main" component={AppTabComponent} />
             ) : (
                 <>
-                <AuthStack.Screen name="SignIn" component={SignIn} />
-                <AuthStack.Screen name="AppTabComponent" component={AppTabComponent} />
+                    <AuthStack.Screen name="SignIn" component={SignIn} />
+                    <AuthStack.Screen name="AppTabComponent" component={AppTabComponent} />
                 </>
             )}
         </AuthStack.Navigator>

@@ -15,8 +15,25 @@ export const REFRESH = `https://securetoken.googleapis.com/v1/token?key=${APIKEY
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-// refresh -> get -> set
+// firebase, AsyncStorage 같이 사용시 warn 뜸.. 확인ㄴ해보자
+import firebase from 'firebase';
 
+const firebaseConfig = {
+  apiKey: "AIzaSyDy8lyHBZfSNZTH9srNpFmTA_ytmllXMm0",
+  authDomain: "rn-testman.firebaseapp.com",
+  databaseURL: "https://rn-testman-default-rtdb.firebaseio.com",
+  projectId: "rn-testman",
+  storageBucket: "rn-testman.appspot.com",
+  messagingSenderId: "752498270430",
+  appId: "1:752498270430:web:2c53f5d49e2a13c032624f"
+};
+
+// firebase.initializeApp(firebaseConfig);
+
+// export const storage = firebase.storage();
+// export const database = firebase.database();
+
+// refresh -> get -> set
 export const setTokens = async (values, callBack) => {
     const firstPair = ["@hongdiary@userId", values.userId]
     const secondPair = ["@hongdiary@token", values.token]
