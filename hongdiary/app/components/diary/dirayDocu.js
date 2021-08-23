@@ -14,9 +14,14 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput
+  TextInput,
+  Image,
+  Touchable,
+  TouchableOpacity
 } from 'react-native';
 
+import { storage, database } from '../../utils/misc'
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 class DiaryDocu extends Component {
 
@@ -36,7 +41,8 @@ class DiaryDocu extends Component {
           title: params.diaryData.data.title,
           description: params.diaryData.data.description,
           imagePath: params.diaryData.data.imagePath,
-        }
+        },
+        image: ''
       }
       :
       this.state = {
@@ -51,8 +57,38 @@ class DiaryDocu extends Component {
         }
       }
     // console.warn(this.state);
+
+    !params.newDiary && params.diaryData.data.imagePath ? (
+      this.getImage()
+    ) : null
   }
 
+  selectImage = () => {
+
+    launchImageLibrary({}, response=>{
+      this.setState({
+        image: response.uri
+      })
+    })
+
+    let imageDir = `index${this.state.diaryData.id}`;
+
+    this.setState(prevState=>({
+      diaryData: {
+        ...prevState.diaryData,
+        imagePath: imageDir
+      }
+    }))
+  }
+
+  
+  getImage = () => {
+    storage.ref('diaryImage').child(`index${this.state.diaryData.id}/image.jpg`).getDownloadURL().then(url => {
+      this.setState({
+        image: url
+      })
+    })
+  }
 
   onChangeInput = (item, value) => {
     if (item === 'date') {
@@ -72,6 +108,8 @@ class DiaryDocu extends Component {
 
     }
   }
+
+
 
   render() {
     return (
@@ -158,10 +196,47 @@ class DiaryDocu extends Component {
           </View>
         </View>
 
-        <View style={{ flex: 4, borderWidth: 0.5 }}>
-          <Text>
-            Image
-          </Text>
+        <View style={styles.imageView}>
+          <View style={{ flex: 10, paddingRight: 15 }}>
+            <Text style={styles.dateText}>Image: </Text>
+            <View style={[styles.dateInputView, styles.imageDisplayView]}>
+              {
+                this.state.diaryData.imagePath ? (
+                  <Image source={{ uri: this.state.image }}
+                    style={{ height: '100%', width: '100%' }} resizeMode="contain" />
+                ) : null
+              }
+            </View>
+          </View>
+
+          <View style={{ flex: 1, paddingRight: 10, paddingTop: 30 }}>
+            {
+              this.state.newDiary ? (
+                <TouchableOpacity
+                  onPress={() => this.selectImage()}
+                >
+                  <Image
+                    source={require('../../assets/images/image.png')}
+                    resizeMode='contain'
+                    style={{
+                      width: 30,
+                      height: 30,
+                    }}
+                  />
+                </TouchableOpacity>
+              ) :
+                <Image
+                  source={require('../../assets/images/image.png')}
+                  resizeMode='contain'
+                  style={{
+                    width: 30,
+                    height: 30,
+                    opacity: 0.2
+                  }}
+                />
+            }
+          </View>
+
         </View>
 
         <View style={{ flex: 1.5, borderWidth: 0.5 }}>
@@ -219,7 +294,19 @@ const styles = StyleSheet.create({
   descriptionText: {
     flex: 0.95,
     marginTop: 10,
+  },
+  imageView: {
+    flex: 4,
+    paddingLeft: 15,
+    paddingRight: 15,
+    flexDirection: 'row',
+  },
+  imageDisplayView: {
+    flex: 0.9,
+    marginTop: 5
   }
+
+
 });
 
 export default DiaryDocu;

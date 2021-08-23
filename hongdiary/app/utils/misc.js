@@ -28,10 +28,10 @@ const firebaseConfig = {
   appId: "1:752498270430:web:2c53f5d49e2a13c032624f"
 };
 
-// firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-// export const storage = firebase.storage();
-// export const database = firebase.database();
+export const storage = firebase.storage();
+export const database = firebase.database();
 
 // refresh -> get -> set
 export const setTokens = async (values, callBack) => {
@@ -44,7 +44,6 @@ export const setTokens = async (values, callBack) => {
     } catch(e) {
       //save error
     }
-  
     console.log("Done.")
   }
 
