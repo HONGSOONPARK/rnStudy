@@ -99,8 +99,12 @@ const AppTabComponent = () => {
                     tabBarShowLabel: false,
                     tabBarStyle: {
                         backgroundColor: '#30A9DE'
-                    }
+                    },
+
+                    // aos에서만 동작, 키보드 사용 시 탭바 삭제
+                    tabBarHideOnKeyboard: true,
                 })
+
             }
         >
             <MainScreenTab.Screen name="DiaryTab" component={DiaryStackComponent} />
