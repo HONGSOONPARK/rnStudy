@@ -31,6 +31,7 @@ firebase.initializeApp(firebaseConfig);
 
 export const storage = firebase.storage();
 export const database = firebase.database();
+export const auth = firebase.auth();
 
 // refresh -> get -> set
 export const setTokens = async (values, callBack) => {

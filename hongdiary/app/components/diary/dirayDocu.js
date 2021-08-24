@@ -48,7 +48,8 @@ class DiaryDocu extends Component {
           description: params.diaryData.data.description,
           imagePath: params.diaryData.data.imagePath,
         },
-        image: ''
+        image: '',
+        userId: params.userId,
       }
       :
       this.state = {
@@ -61,7 +62,9 @@ class DiaryDocu extends Component {
           title: '',
           description: '',
           imagePath: '',
-        }
+        },
+        userId: params.userId,
+
       }
     // console.warn(this.state);
 
@@ -72,10 +75,16 @@ class DiaryDocu extends Component {
 
   deleteData = async () => {
     const id = this.state.diaryData.id;
-    const databaseDirectory = `diary/${id}`;
-    const databaseRef = database.ref(databaseDirectory).child('data');
+    const userId = this.state.userId;
 
-    const storageDirectory = `diaryImage/index${id}`;
+    // const databaseDirectory = `diary/${id}`;
+    // const databaseRef = database.ref(databaseDirectory).child('data');
+    // const storageDirectory = `diaryImage/index${id}`;
+    // const storageRef = storage.ref(storageDirectory).child('image.jpg');
+
+    const databaseDirectory = `diary/${userId}/${id}`;
+    const databaseRef = database.ref(databaseDirectory).child('data');
+    const storageDirectory = `diaryImage/${userId}/index${id}`;
     const storageRef = storage.ref(storageDirectory).child('image.jpg');
 
     try {
@@ -109,14 +118,18 @@ class DiaryDocu extends Component {
       isLoading: true
     })
 
+    const userId = this.state.userId;
     const data = this.state.diaryData;
     const id = data.id;
     
     // db 참조
-    const databaseDirectory = `diary/${id}`;
-    const databaseRef = database.ref(databaseDirectory);
+    // const databaseDirectory = `diary/${id}`;
+    // const databaseRef = database.ref(databaseDirectory);
+    // const storageDirectory = `diaryImage/index${id}/image.jpg`;
     
-    const storageDirectory = `diaryImage/index${id}/image.jpg`;
+    const databaseDirectory = `diary/${userId}/${id}`;
+    const databaseRef = database.ref(databaseDirectory);
+    const storageDirectory = `diaryImage/${userId}/index${id}/image.jpg`;
 
     try {
       await databaseRef.set({data});
@@ -163,6 +176,8 @@ class DiaryDocu extends Component {
     }
   }
 
+  
+
   selectImage = () => {
     launchImageLibrary({}, response => {
       this.setState({
@@ -170,7 +185,8 @@ class DiaryDocu extends Component {
       })
     })
 
-    let imageDir = `diaryImage/index${this.state.diaryData.id}`;
+    // let imageDir = `diaryImage/index${this.state.diaryData.id}`;
+    let imageDir = `index${this.state.diaryData.id}`;
 
     this.setState(prevState => ({
       diaryData: {
@@ -180,9 +196,14 @@ class DiaryDocu extends Component {
     }))
   }
 
-
   getImage = () => {
-    storage.ref('diaryImage').child(`index${this.state.diaryData.id}/image.jpg`).getDownloadURL().then(url => {
+    // storage.ref('diaryImage').child(`index${this.state.diaryData.id}/image.jpg`).getDownloadURL().then(url => {
+    //   this.setState({
+    //     image: url
+    //   })
+    // })
+    storage.ref('diaryImage').child(`${this.state.userId}/${this.state.diaryData.imagePath}/image.jpg`).getDownloadURL()
+    .then(url => {
       this.setState({
         image: url
       })

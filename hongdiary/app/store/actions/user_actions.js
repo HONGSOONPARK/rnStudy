@@ -3,7 +3,7 @@ import { SIGN_IN, SIGN_UP, AUTO_SIGN_IN } from '../types';
 import axios from 'axios';
 
 // api 
-import { SIGNUP, SIGNIN, REFRESH } from '../../utils/misc';
+import { SIGNUP, SIGNIN, REFRESH, auth } from '../../utils/misc';
 
 export const autoSignIn = (refToken) => {
     const request = axios({
@@ -53,7 +53,19 @@ export function signUp(data) {
     }
 }
 
+firebaseLogin = async (email, password) => {
+    try {
+        let user = auth.signInWithEmailAndPassword(email, password);
+        // console.warn('user: ', user)
+    } catch (error) {
+        // console.warn('errr: ', err)
+    }
+}
+
 export function signIn(data) {
+
+    firebaseLogin(data.email, data.password);
+
     const request = axios({
         method: 'POST',
         url: SIGNIN,

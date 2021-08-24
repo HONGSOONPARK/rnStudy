@@ -60,7 +60,7 @@ class DiaryComponent extends Component {
           } else {
             setTokens(this.props.User.auth, () => {
               this.manageState(true);
-              this.props.dispatch(getDiaries());
+              this.props.dispatch(getDiaries(this.props.User));
               // console.log("Get Token :", value);
             })
           }
@@ -69,7 +69,7 @@ class DiaryComponent extends Component {
     });
   }
 
-  renderDiary = (Diaries) => (
+  renderDiary = (Diaries, User) => (
     Diaries.documents ?
       Diaries.documents.map((item, index) => (
         <TouchableOpacity
@@ -79,7 +79,8 @@ class DiaryComponent extends Component {
               newDiary: false,
               diaryData: item,
               index: index,
-              id: item.data.id
+              id: item.data.id,
+              userId: User.auth.userId
             })
           }}
         >
@@ -159,7 +160,7 @@ class DiaryComponent extends Component {
         {this.state.isAuth ?
           <ScrollView style={{ backgroundColor: '#f0f0f0' }}>
             <View style={{ flexDirection: 'column-reverse' }}>
-              {this.renderDiary(this.props.Diaries)}
+              {this.renderDiary(this.props.Diaries, this.props.User)}
             </View>
           </ScrollView>
           :
@@ -185,7 +186,8 @@ class DiaryComponent extends Component {
               this.props.navigation.push('DiaryDocu', {
                 newDiary: true,
                 index: this.props.Diaries.documents.length,
-                id: this.checkNextId(this.props.Diaries)
+                id: this.checkNextId(this.props.Diaries),
+                userId: this.props.User.auth.userId
               })
             }}
           >

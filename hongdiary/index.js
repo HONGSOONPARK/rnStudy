@@ -23,9 +23,13 @@ import reducers from './app/store/reducers'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 
+// thunk
+import thunkMiddleware from 'redux-thunk';
+
+
 // 미들웨어 사용하는 스토어 생성
 const createStoreWithMiddleware = createStore(reducers, composeEnhancers(
-    applyMiddleware(promiseMiddleware)
+    applyMiddleware(promiseMiddleware, thunkMiddleware)
 ))
 
 
