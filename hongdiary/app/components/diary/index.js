@@ -17,7 +17,8 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
-  Button
+  Button,
+  BackHandler
 
 } from 'react-native';
 
@@ -32,6 +33,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { getTokens, setTokens, auth, removeTokens } from '../../utils/misc'
 
+
 // 기종별 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
@@ -45,6 +47,35 @@ class DiaryComponent extends Component {
   manageState = (isAuth) => {
     this.setState({
       isAuth
+    })
+  }
+  
+
+  // 로그아웃 버튼
+  headerStyle = () => {
+    this.props.navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          style={{ flexDirection: 'row', paddingRight: 15, paddingBottom: 5 }}
+          onPress={() => {
+            auth.signOut()
+              .then(() => {
+                removeTokens(() => {
+                  this.props.navigation.navigate('SignIn')
+                })
+              })
+              .catch((err) => {
+                alert('Logout Failed!!', err.message)
+              })
+          }}
+        >
+          <Icon
+            name='logout-variant'
+            size={35}
+            color='#E3d3d3'
+          />
+        </TouchableOpacity>
+      )
     })
   }
 
@@ -67,6 +98,16 @@ class DiaryComponent extends Component {
         })
       }
     });
+
+    // aos 뒤로가기 막기
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      return true
+    })
+
+    { this.state.isAuth ? null : this.headerStyle() }
+    
+
+
   }
 
   renderDiary = (Diaries, User) => (
@@ -155,6 +196,7 @@ class DiaryComponent extends Component {
 
 
   render() {
+    // this.headerStyle()
     return (
       <View>
         {this.state.isAuth ?
@@ -204,6 +246,7 @@ class DiaryComponent extends Component {
 
       </View>
     )
+
   }
 }
 

@@ -8,6 +8,8 @@ import SignIn from './components/auth';
 import Diary from './components/diary';
 import News from './components/news';
 
+import Loading from './components/auth/loading';
+
 import DiaryDocu from './components/diary/dirayDocu';
 import Logo from './utils/logo';
 
@@ -33,6 +35,20 @@ const headerConfig = {
     }
 }
 
+const headerConfig_ = {
+    headerTitleAlign: 'center',
+    headerTintColor: '#fff',
+    headerStyle: {
+        backgroundColor: '#30A9DE',
+    },
+    title: <Logo />,
+    headerTitleStyle: {
+        flex: 1,
+        textAlign: 'center'
+    },
+    headerLeft: null,
+}
+
 
 // 어떻게 설계
 /*
@@ -47,8 +63,6 @@ const headerConfig = {
 */
 
 // #30A9DE #EFDC05 #E53A40 #090707
-
-const isLoggedIn = false;
 
 const TabBarIcon = (focused, name, color) => {
     let iconName, iconSize;
@@ -68,7 +82,7 @@ const TabBarIcon = (focused, name, color) => {
 const DiaryStackComponent = () => {
     return (
         <DiaryStack.Navigator>
-            <DiaryStack.Screen name="Diary" component={Diary} options={headerConfig} />
+            <DiaryStack.Screen name="Diary" component={Diary} options={headerConfig_} />
             <DiaryStack.Screen name="DiaryDocu" component={DiaryDocu} options={headerConfig} />
         </DiaryStack.Navigator>
     )
@@ -77,7 +91,7 @@ const DiaryStackComponent = () => {
 const NewsStackComponent = () => {
     return (
         <NewsStack.Navigator>
-            <NewsStack.Screen name="News" component={News} options={headerConfig} />
+            <NewsStack.Screen name="News" component={News} options={headerConfig_} />
         </NewsStack.Navigator>
     )
 }
@@ -104,7 +118,6 @@ const AppTabComponent = () => {
                     // aos에서만 동작, 키보드 사용 시 탭바 삭제
                     tabBarHideOnKeyboard: true,
                 })
-
             }
         >
             <MainScreenTab.Screen name="DiaryTab" component={DiaryStackComponent} />
@@ -119,14 +132,15 @@ export const RootNavigator = () => {
         <AuthStack.Navigator
             screenOptions={{ headerShown: false }}
         >
-            {isLoggedIn ? (
-                <AuthStack.Screen name="Main" component={AppTabComponent} />
-            ) : (
-                <>
-                    <AuthStack.Screen name="SignIn" component={SignIn} />
-                    <AuthStack.Screen name="AppTabComponent" component={AppTabComponent} />
-                </>
-            )}
+            <AuthStack.Screen name="Loading" component={Loading}/>
+            <AuthStack.Screen name="SignIn" 
+                component={SignIn}
+                options={()=>({gestureEnabled: false})}
+            />
+            <AuthStack.Screen name="AppTabComponent" 
+                component={AppTabComponent} 
+                options={()=>({gestureEnabled: false})} 
+        />
         </AuthStack.Navigator>
     )
 }

@@ -10,6 +10,8 @@ export const SIGNIN = `https://identitytoolkit.googleapis.com/v1/accounts:signIn
 // refresh 토큰
 export const REFRESH = `https://securetoken.googleapis.com/v1/token?key=${APIKEY}`;
 
+
+
 // AsyncStorage 사용, 내부 저장소
 // 참고 url : https://reactnative.dev/docs/asyncstorage
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -70,3 +72,19 @@ export const getTokens  = async (callBack) => {
     // example console.log output:
     // [ ['@MyApp_user', 'myUserValue'], ['@MyApp_key', 'myKeyValue'] ]
   }
+
+
+export const removeTokens = async (callBack) => {
+  try {
+    await AsyncStorage.multiRemove(
+      [
+       "@hongdiary@userId",
+       "@hongdiary@token",
+       "@hongdiary@refToken",
+      ]
+    ).then(()=>{
+      callBack()
+    })
+  } catch (e) {
+  }
+}

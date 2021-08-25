@@ -28,10 +28,6 @@ import { bindActionCreators } from 'redux';
 
 class AuthComponent extends Component {
 
-  state = {
-    loading: false,
-  }
-
   goWithOutLogin = () => {
     this.props.navigation.navigate("AppTabComponent")
   }
@@ -42,43 +38,36 @@ class AuthComponent extends Component {
     // ['@hongdiary@token', 'asddasd....']  -> [1][1]
     // ['@hongdiary@refToken', 'asdsabcb...'] -> [2][1]
 
-    getTokens((value)=>{
-      if(value[1][1] === null ){
-        this.setState({loading:false })
-      }else {
-        this.props.autoSignIn(value[2][1]).then(()=>{
-          if(!this.props.User.auth.token) {
-            this.setState({loading:false})
-          }else {
-            setTokens(this.props.User.auth, ()=>{
+    getTokens((value) => {
+      if (value[1][1] !== null) {
+        this.props.autoSignIn(value[2][1]).then(() => {
+          if (this.props.User.auth.token) {
+            setTokens(this.props.User.auth, () => {
               this.goWithOutLogin();
             })
           }
         })
       }
-      console.log("Get Token :", value);
+      // console.log("Get Token :", value);
     });
+
+    // aos, 유저가 화면 못떠나게
+    this.props.navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+    })
   }
 
   render() {
-    if (this.state.loading) {
-      return (
-        <View style={styles.loading}>
-          <ActivityIndicator />
+    return (
+      <ScrollView style={styles.container}>
+        <View>
+          <AuthLogo />
+          <AuthForm
+            goWithOutLogin={this.goWithOutLogin}
+          />
         </View>
-      )
-    } else {
-      return (
-        <ScrollView style={styles.container}>
-          <View>
-            <AuthLogo />
-            <AuthForm
-              goWithOutLogin={this.goWithOutLogin}
-            />
-          </View>
-        </ScrollView>
-      )
-    }
+      </ScrollView>
+    )
   }
 }
 
@@ -91,23 +80,23 @@ const styles = StyleSheet.create({
 
   },
   container: {
-      flex: 1,
-      backgroundColor: '#30A9DE',
-      padding: 130,
-      paddingLeft: 50,
-      paddingRight: 50,
+    flex: 1,
+    backgroundColor: '#30A9DE',
+    padding: 130,
+    paddingLeft: 50,
+    paddingRight: 50,
 
   }
 });
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     User: state.User
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({autoSignIn}, dispatch);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ autoSignIn }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthComponent);
