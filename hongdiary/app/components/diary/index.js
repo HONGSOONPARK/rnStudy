@@ -104,8 +104,7 @@ class DiaryComponent extends Component {
       return true
     })
 
-    { this.state.isAuth ? null : this.headerStyle() }
-    
+    this.headerStyle()
 
 
   }
@@ -197,6 +196,8 @@ class DiaryComponent extends Component {
 
   render() {
     // this.headerStyle()
+
+    console.disableYellowBox = true;
     return (
       <View>
         {this.state.isAuth ?
